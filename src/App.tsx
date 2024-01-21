@@ -1,12 +1,12 @@
 import { SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { CreateComplainSchemaType, TagSchemaType, ValidationSchema, createComplainSchema } from './schema/trip.schema';
+import { CreateTripSchemaType, TagSchemaType, createTripSchema } from './schema/trip.schema';
 
 
 
 function App() {
-  const { register, handleSubmit, control, formState: { errors } } = useForm<CreateComplainSchemaType>({
-    resolver: zodResolver(createComplainSchema),
+  const { register, handleSubmit, control, formState: { errors } } = useForm<CreateTripSchemaType>({
+    resolver: zodResolver(createTripSchema),
   });
   const { fields, append, remove } = useFieldArray({
     control,
@@ -16,7 +16,7 @@ function App() {
   const addComplain = (chosenRow: TagSchemaType) => {
     append(chosenRow)
   }
-  const submitForum: SubmitHandler<ValidationSchema> = (data) => {
+  const submitForum: SubmitHandler<CreateTripSchemaType> = (data) => {
     //TODO: submit data to server
     console.log(data)
   }

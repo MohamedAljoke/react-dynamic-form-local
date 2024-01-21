@@ -9,14 +9,10 @@ export const tagSchema = object({
   }),
 });
 
-export const createComplainSchema = object({
+export const createTripSchema = object({
   title: string().min(1, { message: 'Title is required' }),
   description: string().min(1, { message: 'Description is required' }),
-  taggedPeople: array(tagSchema).refine((data) => data.length > 0, {
-    message: 'At least one tagged person is required',
-  }),
+  taggedPeople: array(tagSchema),
 });
-export type CreateComplainSchemaType = TypeOf<typeof createComplainSchema>;
+export type CreateTripSchemaType = TypeOf<typeof createTripSchema>;
 export type TagSchemaType = TypeOf<typeof tagSchema>;
-
-export type ValidationSchema = z.infer<typeof createComplainSchema>;
